@@ -2,84 +2,68 @@
 
 Dùng sau khi nhóm đã có evidence. Mục tiêu là chốt một build slice đủ nhỏ cho Day 06.
 
+**Nhóm:** 4Ae · **Track:** Travel & Hospitality · **Product:** Vinpearl / MyVinpearl  
+**Slice chốt:** **Gợi ý tour, buffet và dịch vụ** (không lịch trình theo ngày/giờ)
+
 ## 1. Gom evidence thành cụm
 
-Gom theo **workflow/pain**, không gom theo tên feature.
-
-Ví dụ cụm tốt:
-
-- "Không biết chọn chuyên khoa"
-- "Không hiểu vì sao bị tính phí"
-- "Muốn sửa output nhưng không có chỗ sửa"
-- "Bot trả lời tự tin nhưng không dẫn nguồn"
+| Cụm (workflow/pain) | Evidence hỗ trợ |
+|---|---|
+| "Có nhiều tour/buffet/dịch vụ nhưng không biết chọn cái nào" | Self-use: nhiều tab Safari, VinWonders, buffet, combo; public: catalog tách rời. |
+| "Khó so sánh dịch vụ nào hợp gia đình có trẻ em" | Self-use: không biết ưu tiên Safari vs VinWonders vs buffet; phỏng vấn đề xuất. |
+| "Muốn đổi hướng gợi ý (buffet vs tour)" | Correction path trong thin SPEC. |
+| "AI gợi ý gói/giá không thật" | ChatGPT pattern; failure giá/tồn kho real-time. |
+| "Input mơ hồ" | Low-confidence path. |
 
 ## 2. Viết insight
 
-Form:
-
 ```text
-User [segment] không chỉ cần [surface need].
-Họ thật ra cần [deeper need],
-vì [evidence pattern].
-```
-
-Ví dụ:
-
-```text
-Người lần đầu đi khám không chỉ cần danh sách chuyên khoa.
-Họ cần hỗ trợ ra quyết định an toàn,
-vì nhiều review/observation cho thấy họ không biết triệu chứng của mình nên đi khoa nào.
+User gia đình có trẻ em chuẩn bị đi Vinpearl Phú Quốc không chỉ cần xem catalog tour, vé và buffet.
+Họ cần danh sách gợi ý có lọc — tour, buffet, dịch vụ nào đáng cân nhắc, vì sao — rồi tự book trên kênh chính thức,
+vì self-use: thông tin rải nhiều trang, khó so sánh; pain là chọn dịch vụ, không xếp lịch từng giờ (MVP).
 ```
 
 ## 3. Viết opportunity
 
-Form:
-
 ```text
-Cơ hội là dùng AI để [augment/automate hành động hẹp],
-giúp user [kết quả],
-trong khi vẫn kiểm soát [failure/risk].
+Cơ hội là dùng AI để augment chọn dịch vụ — form + catalog mẫu → 5–8 gợi ý + lý do + chỉnh chat,
+giúp user rút ngắn thời gian duyệt catalog và tự tin trước khi book,
+kiểm soát rủi ro: chỉ catalog; user quyết; không bịa giá/giờ/tồn kho real-time.
 ```
 
 ## 4. Chọn build slice
 
-Build slice tốt phải qua 5 câu hỏi:
-
-| Câu hỏi | Đạt khi |
+| Câu hỏi | Nhóm 4Ae |
 |---|---|
-| User cụ thể chưa? | Nói được ai dùng, trong bối cảnh nào. |
-| Task đủ hẹp chưa? | Demo được trong 3-5 phút. |
-| AI decision rõ chưa? | AI gợi ý/tự làm một việc cụ thể. |
-| Failure path rõ chưa? | Có một case AI không chắc hoặc sai để test. |
-| Có evidence không? | Có bằng chứng từ self-use/review/user/competitor. |
+| User cụ thể? | **Đạt.** Gia đình 2+1, Phú Quốc 3N2Đ, đang chọn tour/buffet/dịch vụ. |
+| Task đủ hẹp? | **Đạt.** Form → list gợi ý → chỉnh chat; demo 3–5 phút. |
+| AI decision rõ? | **Đạt.** AI lọc + giải thích; user book. |
+| Failure path rõ? | **Đạt.** Low-confidence, real-time giá/tồn kho, correction, ngoài catalog. |
+| Có evidence? | **Đạt.** Self-use + TripAdvisor/Klook + phỏng vấn planned. |
 
-## 5. Quyết định: giữ, giảm scope, hay đổi hướng?
+## 5. Quyết định
 
-| Tình huống | Quyết định |
+| Tình huống | Áp dụng |
 |---|---|
-| Evidence yếu, user mơ hồ | Dừng build sâu; quay lại research 20 phút. |
-| Ý tưởng quá rộng | Giữ domain, cắt xuống một flow. |
-| AI không cần thiết | Dùng rule/manual prototype; ghi rõ vì sao không dùng AI sâu. |
-| Rủi ro cao | Chọn augmentation hoặc conditional automation. |
-| Không demo được trong 1 ngày | Đưa phần lớn vào backlog, giữ một path nhỏ. |
+| Ý tưởng quá rộng | **Đã cắt:** bỏ itinerary planner, fatigue, cost cả chuyến → backlog. |
+| Rủi ro cao | **Augmentation**, catalog-only. |
+| Demo 1 ngày | Form + service cards + 1 vòng chat correction + `services.json`. |
 
 ## 6. Câu chốt cuối
 
-Điền câu này trước khi rời lớp:
-
 ```text
-Dựa trên [evidence],
-nhóm sẽ build [prototype slice],
-cho [user],
-để giải quyết [pain],
-bằng cách AI [augment/automate task],
-và sẽ test failure path [failure mode].
+Dựa trên self-use (nhiều tab tour/buffet/dịch vụ, khó chọn lọc cho gia đình) và pattern TripAdvisor/Klook,
+nhóm sẽ build AI gợi ý tour, buffet và dịch vụ Vinpearl — form + 5–8 gợi ý từ catalog + chỉnh chat,
+cho gia đình có trẻ em chuẩn bị chuyến đi Phú Quốc,
+để giải quyết pain không biết tour/buffet/dịch vụ nào phù hợp,
+bằng AI augment lọc và giải thích — user tự book,
+test failure path gợi ý ngoài catalog / bịa giá real-time.
 ```
 
 ## 7. Backlog
 
-Những thứ **không build trong Day 06**:
-
-- 
-- 
-- 
+- Lịch trình theo ngày/sáng/chiều/tối, fatigue check
+- Ước tính chi phí cả chuyến (phòng + vé + ăn tổng)
+- Booking, payment, MyVinpearl đầy đủ, FAQ chung
+- Giá/giờ/tồn kho real-time, auto đặt tour
+- API catalog Vinpearl live (MVP: `services.json`)
